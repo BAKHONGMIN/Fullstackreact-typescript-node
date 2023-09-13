@@ -1,0 +1,24 @@
+import React, { useEffect, useRef } from "react";
+
+export interface ListItem {
+  id: number;
+}
+
+export interface ListItems {
+  listItems?: Array<ListItem>;
+}
+
+const ListCreator = ({ listItems }: ListItems) => {
+  let renderItems = useRef<Array<JSX.Element> | undefined>();
+  useEffect(() => {
+    console.log("listItems updated");
+    renderItems.current = listItems?.map((item, index) => {
+      return <div key={item.id}>{item.id}</div>;
+    });
+  }, [listItems]);
+
+  console.log("ListCreator render");
+  return <>{renderItems.current}</>;
+};
+
+export default ListCreator;
